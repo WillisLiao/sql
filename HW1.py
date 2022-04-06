@@ -97,8 +97,21 @@ while True:
 
 
     elif action == '3':
+        date = input('date: ')
+        creationdatelist = data['datacreationdate'].tolist()
+        r = re.compile(f'.*{date}') # '.'Any character except newline , '*' 0 or more  
+        newlist = list(filter(r.match, creationdatelist))
+
+
         data.set_index("datacreationdate", inplace=True)
-        print(data.loc[input('xxxx/x/xx xx:xx 個位數不用加0,幾點幾分要加')])
+        count=0
+        geez =[]
+        for i in range(len(newlist)):
+            if count ==5:
+                break
+            print(f'{data.loc[newlist[i]]}\n\n')
+            count+=1
+        print(f'.......\n......\n.....\n....\nlisted 5 rows on the date {date}\n')
     elif action == 'stop':
         break
 
